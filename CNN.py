@@ -7,25 +7,25 @@ from keras.layers import Dense
 # Konvolüsyonel Sinir Ağının Başlatılması
 classifier = Sequential()
 
-# Step 1 - Convolution (creating Feature maps)
+# Adım 1 - Evrişim (Özellik haritaları oluşturma)
 classifier.add(Conv2D(32,(3,3), input_shape = (64,64,3), activation = "relu"))
 
-# Step 2 - Max Pooling reduced feature map, maintaining features
+# Adım 2 - Max Pooling azaltılmış özellik haritası, özelliklerin korunması
 classifier.add(MaxPooling2D(pool_size = (2,2)))
 
-#Adding another convolutional layer to increase accuracy and decrease over fitting
+# Doğruluğu artırmak ve uydurma azaltmak için başka bir kıvrım katmanı eklemek
 classifier.add(Conv2D(32,(3,3), activation = "relu"))
 classifier.add(MaxPooling2D(pool_size = (2,2)))
 
-#Flattening turn the feature map into one vector (column)
+# Düzleştirme, özellik haritasını bir vektöre (sütun) dönüştürür.
 classifier.add(Flatten())
  
-#Step 4 Full connection
+# Adım 4 Full bağlantı
  
 classifier.add(Dense(units = 128, activation = "relu" ))
 classifier.add(Dense(units =  1, activation = "sigmoid" ))
 
-#compiling convolution neural network
+# Konvolüsyonel sinir ağını derleme
 
 classifier.compile(optimizer = "adam", loss = "binary_crossentropy", metrics = ["accuracy"])
 
